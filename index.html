@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--Contenedor Principal: centraliza la interfaz de usuario -->
+    <main class="cont-principal" id="contenedor-app">
+
+        <header class="titulo-app">
+            <h1>GESTOR DE TAREAS</h1>
+        </header>
+
+        <!--Seccion de Entrada: captura de datos del usuario -->
+        <section class="controles-entrada">
+            <input type="text" id="input-tarea" class="inp-principal" placeholder="Escribe una nueva tarea..." aria-label="Nombre de la nueva tarea">
+
+            <button id="btn-agregar" class="btn-principal">AÑADIR</button>
+        </section>
+
+        <!--Listado Dinamico: contenedor de elementos generados por JS -->
+        <ul id="lista-tareas" class="lista-contenedor">
+            <!--Los elementos <li> se inyectaran aqui -->
+        </ul>
+
+    </main>
+
+    <!--Logica de Negocio-->
+    <script src="script.js"></script>
+</body>
+</html>
