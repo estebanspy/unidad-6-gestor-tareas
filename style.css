@@ -1,0 +1,247 @@
+/* ============================================================
+   GESTOR DE TAREAS — style.css
+   ============================================================ */
+
+/* ---------- Variables globales ---------- */
+:root {
+  --color-fondo:        #0f0f0f;
+  --color-superficie:   #1a1a1a;
+  --color-borde:        #2e2e2e;
+  --color-acento:       #b8f53e;
+  --color-acento-hover: #ceff5a;
+  --color-texto:        #e8e8e8;
+  --color-texto-suave:  #888888;
+  --color-completada:   #3a3a3a;
+  --color-eliminar:     #ff4d4d;
+  --radio-borde:        8px;
+  --transicion:         0.2s ease;
+  --fuente-titulo:      'Courier New', Courier, monospace;
+  --fuente-cuerpo:      'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ---------- Reset básico ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- Body y fondo ---------- */
+body {
+  background-color: var(--color-fondo);
+  background-image: radial-gradient(var(--color-borde) 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: var(--color-texto);
+  font-family: var(--fuente-cuerpo);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 48px 16px;
+}
+
+/* ---------- Contenedor principal ---------- */
+.cont-principal {
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 580px;
+  padding: 36px 32px;
+  box-shadow: 0 0 40px rgba(184, 245, 62, 0.05), 0 8px 32px rgba(0,0,0,0.4);
+}
+
+/* ---------- Header / Título ---------- */
+.titulo-app {
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--color-borde);
+  padding-bottom: 20px;
+}
+
+.titulo-app h1 {
+  font-family: var(--fuente-titulo);
+  font-size: 1.6rem;
+  letter-spacing: 6px;
+  color: var(--color-acento);
+  text-shadow: 0 0 20px rgba(184, 245, 62, 0.4);
+}
+
+/* ---------- Sección de entrada ---------- */
+.controles-entrada {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+/* Input de texto */
+.inp-principal {
+  flex: 1;
+  background-color: var(--color-fondo);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-borde);
+  color: var(--color-texto);
+  font-family: var(--fuente-cuerpo);
+  font-size: 0.95rem;
+  padding: 12px 16px;
+  outline: none;
+  transition: border-color var(--transicion), box-shadow var(--transicion);
+}
+
+.inp-principal::placeholder {
+  color: var(--color-texto-suave);
+}
+
+.inp-principal:focus {
+  border-color: var(--color-acento);
+  box-shadow: 0 0 0 3px rgba(184, 245, 62, 0.12);
+}
+
+/* Botón añadir */
+.btn-principal {
+  background-color: var(--color-acento);
+  border: none;
+  border-radius: var(--radio-borde);
+  color: #0f0f0f;
+  cursor: pointer;
+  font-family: var(--fuente-titulo);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 12px 20px;
+  transition: background-color var(--transicion), transform var(--transicion), box-shadow var(--transicion);
+  white-space: nowrap;
+}
+
+.btn-principal:hover {
+  background-color: var(--color-acento-hover);
+  box-shadow: 0 0 16px rgba(184, 245, 62, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-principal:active {
+  transform: translateY(0);
+}
+
+/* ---------- Lista de tareas ---------- */
+.lista-contenedor {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ---------- Elemento de tarea individual ---------- */
+.tarea-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--color-fondo);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-borde);
+  padding: 14px 16px;
+  /* Animación de entrada al añadir */
+  animation: entradaTarea 0.25s ease forwards;
+  transition: border-color var(--transicion), background-color var(--transicion);
+}
+
+.tarea-item:hover {
+  border-color: #444;
+}
+
+/* Animación de entrada */
+@keyframes entradaTarea {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Texto de la tarea: ocupa todo el espacio disponible */
+.tarea-texto {
+  flex: 1;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: color var(--transicion), text-decoration var(--transicion);
+  user-select: none; /* Evita selección accidental al hacer clic */
+}
+
+/* ---------- Estado: tarea completada ---------- */
+.tarea-item.completada {
+  background-color: var(--color-completada);
+  border-color: #3a3a3a;
+}
+
+.tarea-item.completada .tarea-texto {
+  color: var(--color-texto-suave);
+  text-decoration: line-through;
+}
+
+/* ---------- Botones de acción (completar / eliminar) ---------- */
+.btn-accion {
+  background: none;
+  border: 1px solid var(--color-borde);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 6px 10px;
+  transition: background-color var(--transicion), border-color var(--transicion), transform var(--transicion);
+  flex-shrink: 0; /* No se encoge aunque el texto sea largo */
+}
+
+.btn-completar {
+  color: var(--color-acento);
+}
+
+.btn-completar:hover {
+  background-color: rgba(184, 245, 62, 0.1);
+  border-color: var(--color-acento);
+}
+
+.btn-eliminar {
+  color: var(--color-eliminar);
+}
+
+.btn-eliminar:hover {
+  background-color: rgba(255, 77, 77, 0.1);
+  border-color: var(--color-eliminar);
+}
+
+.btn-accion:active {
+  transform: scale(0.92);
+}
+
+/* ---------- Mensaje de lista vacía ---------- */
+.lista-vacia {
+  text-align: center;
+  color: var(--color-texto-suave);
+  font-size: 0.9rem;
+  padding: 32px 0;
+  letter-spacing: 1px;
+  font-family: var(--fuente-titulo);
+}
+
+/* ---------- Responsive: pantallas pequeñas ---------- */
+@media (max-width: 480px) {
+  .cont-principal {
+    padding: 24px 18px;
+  }
+
+  .titulo-app h1 {
+    font-size: 1.2rem;
+    letter-spacing: 4px;
+  }
+
+  .controles-entrada {
+    flex-direction: column;
+  }
+
+  .btn-principal {
+    width: 100%;
+    padding: 14px;
+  }
+}
